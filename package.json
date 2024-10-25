@@ -1,0 +1,26 @@
+{
+  "name": "proposify-full-stack-engineer-takehome",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon",
+    "test": "jest \"tests/.*\\.test\\.ts\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/proposify/full-stack-engineer-takehome.git"
+  },
+  "private": true,
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "jest": "^29.7.0",
+    "nodemon": "^3.1.7",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.3"
+  },
+  "dependencies": {
+    "express": "^4.21.1",
+    "socket.io": "^4.8.1"
+  }
+}
