@@ -10,72 +10,77 @@
 **Feel free to change whatever you see fit** in the project, the structure and the way the code were written are not set on stone and were just added to help lead you straight on solving the challenge.
 
 # Instructions
-Objective:
+
+***Objective:***
 Build a simplified real-time collaborative note-taking application that allows multiple users to edit a note simultaneously with live updates.
 
-Expect development time:  2 hours
+***Expect development time:***  2 hours
 
-Project Description:
+**Project Description:**
+
 Create a web application where users can:
 
-Create and Edit Notes:
+- Create and Edit Notes:
 
-Utilize a WYSIWYG editor to format text (e.g., bold, italic, underline).
+  - Utilize a WYSIWYG editor to format text (e.g., bold, italic, underline).
 
-Implement live preview of the formatted text.
+  - Implement live preview of the formatted text.
 
-Real-Time Collaboration
+- Real-Time Collaboration
 
-Use WebSockets to handle live updates and data synchronization.
+  - Use WebSockets to handle live updates and data synchronization.
 
-Basic Backend Integration:
+- Basic Backend Integration:
 
-Set up a simple backend to handle saving and retrieving notes using a RESTful API.
+  - Implement basic user authentication to manage different user sessions.
 
-(Optional for extra credit) Implement basic user authentication to manage different user sessions.
+**Technical Requirements:**
+- Frontend:
 
-Technical Requirements:
-Frontend:
+  - Framework: React with TypeScript
 
-Framework: React with TypeScript
+  - Suggested WYSIWYG Editor packages 
+    - CKEditor5
+    - Froala
+    - TipTap
+    - QuillJS
+    - or your own choice.
 
-WYSIWYG Editor
+  - State Management
 
-State Management
+  - Real-Time Updates: Integrate WebSocket 
 
-Real-Time Updates: Integrate WebSocket 
+- Backend:
 
-Backend:
+  - Language: Node.js with Express or PHP (based on your stack)
 
-Language: Node.js with Express or PHP (based on your stack)
+  - Real-Time Communication: Set up WebSocket server to broadcast updates to connected clients
 
-Real-Time Communication: Set up WebSocket server to broadcast updates to connected clients
+- Database:
 
-Database:
+  - Use an in-memory data store (like a simple JavaScript object) for simplicity, given the time constraint.
 
-Use an in-memory data store (like a simple JavaScript object) for simplicity, given the time constraint.
+**Submission Guidelines:**
+- Repository:
 
-Submission Guidelines:
-Repository:
+  - Create a public GitHub repository containing your code.
 
-Create a public GitHub repository containing your code.
+  - Ensure clear commit messages and a logical commit history.
 
-Ensure clear commit messages and a logical commit history.
+- README File:
 
-README File:
+  - Project Overview: Brief description of the project.
 
-Project Overview: Brief description of the project.
+  - Setup Instructions: Step-by-step guide to run the application locally.
 
-Setup Instructions: Step-by-step guide to run the application locally.
+  - Technology Stack: List the technologies and libraries used.
 
-Technology Stack: List the technologies and libraries used.
+  - Features Implemented: Highlight the key features you’ve built.
 
-Features Implemented: Highlight the key features you’ve built.
+  - Future Improvements: Mention any additional features or improvements you would implement given more time.
 
-Future Improvements: Mention any additional features or improvements you would implement given more time.
+- Running the Project:
 
-Running the Project:
+  - Provide clear instructions to install dependencies and start both frontend and backend servers.
 
-Provide clear instructions to install dependencies and start both frontend and backend servers.
-
-Ensure that the application runs without issues.
+  - Ensure that the application runs without issues.
