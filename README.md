@@ -46,7 +46,7 @@ Create a web application where users can:
     - QuillJS
     - or your own choice.
 
-  - State Management
+  - State management other than local states
 
   - Real-Time Updates: Integrate WebSocket
     
