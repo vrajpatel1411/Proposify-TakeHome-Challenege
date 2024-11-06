@@ -20,7 +20,7 @@ Build a simplified real-time collaborative note-taking application that allows m
 
 Create a web application where users can:
 
-- Create and Edit Notes:
+- Create an Edit Notes:
 
   - Utilize a WYSIWYG editor to format text (e.g., bold, italic, underline).
 
@@ -48,7 +48,9 @@ Create a web application where users can:
 
   - State Management
 
-  - Real-Time Updates: Integrate WebSocket 
+  - Real-Time Updates: Integrate WebSocket
+    
+  - Bonus: Create a modal to appear when the WebSocket connection is disconnected.
 
 - Backend:
 
