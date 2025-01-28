@@ -1,42 +1,34 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+@import "tailwindcss";
+
+* {
+  box-sizing: border-box;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+@layer components {
+  .tiptap {
+    @apply relative w-full min-h-[90vh] max-h-[90vh] my-2 border p-4 rounded-lg shadow-lg space-y-4 overflow-y-auto;
   }
-  to {
-    transform: rotate(360deg);
+
+  .ProseMirror {
+    @apply h-full overflow-auto;
   }
-}
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+  .button-style {
+    @apply bg-gray-100 hover:bg-gray-200 text-black font-bold py-1 px-1 rounded;
   }
-}
 
-.card {
-  padding: 2em;
-}
+  .is-active {
+    @apply bg-gray-200;
+  }
+  .button-group {
+    @apply flex space-x-2;
+  }
 
-.read-the-docs {
-  color: #888;
+  h1 {
+    @apply ml-2 text-2xl font-bold;
+  }
+
+  p {
+    @apply ml-4;
+  }
 }
