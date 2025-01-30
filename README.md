@@ -6,8 +6,8 @@ This is a full-stack web application built using **React** for the frontend and 
 
 ## Technology Stack
 
-- **Frontend:** React, React Router, Context API, Tailwind CSS, Material UI Icons, Tip-tap
-- **Backend:** Node.js, Express.js
+- **Frontend:** React, React Router, Context API, Tailwind CSS, Material UI Icons, Tip-tap, Socket Io
+- **Backend:** Node.js, Express.js, Socket io
 - **Database:** In-memory
 - **Authentication:** JWT (JSON Web Token)
 
