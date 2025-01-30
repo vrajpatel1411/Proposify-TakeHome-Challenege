@@ -13,27 +13,35 @@ const LoginPage = () => {
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-
+    const pattern = /^[\w.-]+@([\w-]+\.)+[\w-]{2,4}$/;
     try {
-      // Call your backend login API here
-      const response = await fetch("http://localhost:3005/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ username: email, password }), // Assuming 'email' is used as 'username'
-      });
+      if (email && password) {
+        if (!pattern.test(email)) {
+          setError("Please enter a valid email address.");
+          return;
+        }
+        const response = await fetch("http://localhost:3005/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ username: email, password }), // Assuming 'email' is used as 'username'
+        });
 
-      if (!response.ok) {
-        throw new Error("Invalid credentials, please try again.");
+        if (!response.ok) {
+          throw new Error("Invalid credentials, please try again.");
+        }
+
+        const data = await response.json();
+        const { token } = data;
+        const { username } = data;
+        login(token, username);
+        navigate("/editor");
+      } else {
+        setError("Please fill in both fields.");
       }
-
-      const data = await response.json();
-      const { token } = data; // Get the token from the response
-      login(token); // Log the user in after successful login
-      navigate("/editor"); // Redirect to the dashboard
     } catch (err) {
-      setError("Invalid credentials, please try again." + err);
+      setError("" + err);
     }
   };
 
@@ -76,7 +84,7 @@ const LoginPage = () => {
         <p className="mt-4 text-center text-sm">
           Don't have an account?{" "}
           <Link
-            to="/register"
+            to="/"
             className="text-blue-600 hover:underline">
             Register here
           </Link>

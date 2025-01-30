@@ -15,10 +15,9 @@ const App = () => {
             element={<LoginPage />}
           />
           <Route
-            path="/register"
+            path="/"
             element={<RegisterPage />}
           />{" "}
-          {/* Add Register Route */}
           <Route
             path="/editor"
             element={

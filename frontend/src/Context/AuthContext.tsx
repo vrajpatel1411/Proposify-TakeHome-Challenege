@@ -2,7 +2,7 @@ import { createContext, useContext } from "react";
 
 interface AuthContextType {
   isAuthenticated: boolean;
-  login: (token: string) => void;
+  login: (token: string, username: string) => void;
   logout: () => void;
 }
 
@@ -15,6 +15,7 @@ const useAuth = (): AuthContextType => {
   if (!context) {
     throw new Error("useAuth must be used within an AuthProvider");
   }
+  console.log(context);
   return context;
 };
 

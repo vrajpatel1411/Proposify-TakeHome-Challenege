@@ -105,7 +105,7 @@ const MenuBar = ({ editor }: MenuBarProps) => {
         </button>
 
         <button
-          onClick={() => editor.chain().focus().toggleOrderedList().run()}
+          onClick={() => editor.chain().focus().toggleBulletList().run()}
           className={
             editor.isActive("bulletList")
               ? "is-active button-style"

@@ -1,48 +1,15 @@
 import { Server as SocketServer, Socket } from "socket.io";
 import { Server as HttpServer } from "http";
 import { Server as HttpsServer } from "https";
-
+import InMemoryContentDatabase from "./Model/Context";
 var jwt = require("jsonwebtoken");
 
-const JWT_SECRET = "your-jwt-secret"; // Same secret as in index.ts
-
-// In-Memory Database Simulation
-interface Content {
-  id: string;
-  content: string;
-}
-
-class InMemoryDatabase {
-  private contentStore: { [key: string]: Content } = {};
-
-  saveContent(id: string, content: string): Content {
-    const newContent: Content = { id, content };
-    this.contentStore[id] = newContent;
-    return newContent;
-  }
-
-  getContent(id: string): Content | undefined {
-    return this.contentStore[id];
-  }
-
-  updateContent(id: string, content: string): Content | undefined {
-    const existingContent = this.contentStore[id];
-    if (existingContent) {
-      existingContent.content = content;
-      return existingContent;
-    }
-    return undefined;
-  }
-
-  getAllContent(): Content[] {
-    return Object.values(this.contentStore);
-  }
-}
+const JWT_SECRET = "Sample JWT Secret"; // Same secret as in index.ts
 
 const startSocketServer = (httpServer: HttpServer | HttpsServer) => {
   const io: SocketServer = new SocketServer(httpServer, { cors: {} });
 
-  const db = new InMemoryDatabase();
+  const db = new InMemoryContentDatabase();
   const defaultContent =
     "Write your story, ideas, or blog post here. Let your creativity flow!";
 
@@ -51,8 +18,8 @@ const startSocketServer = (httpServer: HttpServer | HttpsServer) => {
   const onConnection = (socket: Socket) => {
     console.log("Connection started with socket id: " + socket.id);
 
-    // Get the token from the client (assuming it's sent in the query string or headers)
-    const token = socket.handshake.query.token as string;
+    const token = socket.handshake.auth.token as string;
+
     if (!token) {
       socket.emit("error", "Authentication required");
       socket.disconnect();
@@ -61,24 +28,20 @@ const startSocketServer = (httpServer: HttpServer | HttpsServer) => {
 
     jwt.verify(token, JWT_SECRET, (err: any, user: any) => {
       if (err) {
+        console.log("Invalid or expired token");
         socket.emit("error", "Invalid or expired token");
         socket.disconnect();
         return;
       }
-
-      console.log("Authenticated user:", user.username);
 
       // Send the current content to the newly connected client
       socket.emit("contentUpdate", initialContent.content);
 
       // Listen for content updates from this client
       socket.on("contentUpdate", (content: string) => {
-        console.log("Received updated content:", content);
-
         const updatedContent = db.updateContent("1", content);
 
         if (updatedContent) {
-          console.log("Broadcasting updated content to all clients");
           io.emit("contentUpdate", updatedContent.content);
         }
       });

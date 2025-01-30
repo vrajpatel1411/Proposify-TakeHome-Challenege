@@ -31,4 +31,12 @@
   p {
     @apply ml-4;
   }
+
+  ul {
+    @apply ml-6 list-disc;
+  }
+
+  ol {
+    @apply ml-6 list-decimal;
+  }
 }

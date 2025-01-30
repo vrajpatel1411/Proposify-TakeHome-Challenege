@@ -8,36 +8,47 @@ const RegisterPage = () => {
   const { login } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
-
+    const pattern = /^[\w.-]+@([\w-]+\.)+[\w-]{2,4}$/;
     try {
-      if (email && password) {
-        // Call your backend registration API here
-        const response = await fetch("http://localhost:3005/register", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ username: email, password }), // Assuming 'email' is used as 'username'
-        });
+      if (email && password && confirmPassword) {
+        if (pattern.test(email)) {
+          if (password === confirmPassword) {
+            const response = await fetch("http://localhost:3005/register", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ username: email, password }),
+            });
 
-        if (!response.ok) {
-          throw new Error("Registration failed. Please try again.");
+            if (!response.ok) {
+              throw new Error("Registration failed. Please try again.");
+            }
+
+            const data = await response.json();
+
+            const { token } = data;
+            const { username } = data;
+            login(token, username);
+
+            navigate("/editor");
+          } else {
+            setError("Passwords do not match.");
+          }
+        } else {
+          setError("Please enter a valid email address.");
         }
-
-        const data = await response.json();
-        const { token } = data; // Get the token from the response
-        login(token); // Log the user in after successful registration
-        navigate("/editor"); // Redirect to the dashboard
       } else {
         setError("Please fill in both fields.");
       }
     } catch (err) {
-      setError("Registration failed. Please try again." + err);
+      setError("" + err);
     }
   };
 
@@ -66,6 +77,18 @@ const RegisterPage = () => {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              required
+              className="w-full p-2 mt-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700">
+              Confirmed Password
+            </label>
+            <input
+              type="password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
               required
               className="w-full p-2 mt-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
